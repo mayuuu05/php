@@ -35,6 +35,17 @@ This is a simple hospital registration form built using PHP and MySQL. It allows
    <img  height="450" src="https://github.com/user-attachments/assets/7bfcb70f-f28e-4378-b62e-c84629c81ce0" />
 
 </div>
+<div>
+   <img  height="450" src="https://github.com/user-attachments/assets/db6c29c2-a457-4f6a-b208-4776c34ce998" />
+   <img  height="450" src="https://github.com/user-attachments/assets/239f07b6-63a2-49ad-93ac-cdc22eb83621" />
+
+
+   <video height="450" src="https://github.com/user-attachments/assets/576d1eab-8587-461f-be33-8786ac0142ca" />
+  
+
+</div>
+
+
 
 
 
