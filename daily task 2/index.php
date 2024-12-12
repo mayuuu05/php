@@ -1,36 +1,38 @@
 <?php
 include("config.php");
-
 session_start();
-
 $c1 = new Config();
 
-
-// $c1->connect();
-
-$is_btn_set = isset($_POST['button']);
-if ($is_btn_set) {
+if (isset($_POST['button'])) {
     $name = $_POST['name'];
     $age = $_POST['age'];
     $number = $_POST['number'];
     $address = $_POST['address'];
 
-    $c1->insert($name, $age, $number, $address);
-    header("Location:index.php");
+    // Basic validation
+    $nameValid = preg_match("/^[a-zA-Z ]+$/", $name);
+    $ageValid = is_numeric($age) && $age > 0 && $age <= 120;
+    $numberValid = preg_match("/^[0-9]{10}$/", $number);
+    $addressValid = strlen($address) > 5;
+
+    if ($nameValid && $ageValid && $numberValid && $addressValid) {
+        $c1->insert($name, $age, $number, $address);
+        $popupMessage = "Registration successful!";
+        $popupType = "success";
+    } else {
+        $popupMessage = "Validation failed. Please check your inputs.";
+        $popupType = "error";
+    }
 }
-
-
-
 
 if (isset($_POST['delete'])) {
     $id = $_POST['deleteId'];
     $c1->delete($id);
     header("Location:index.php");
-
 }
 
 if (isset($_POST['update'])) {
-    $id = $_POST['deleteId'];
+    $id = $_REQUEST['deleteId'];
     $name = $_POST['nameId'];
     $age = $_POST['ageId'];
     $number = $_POST['numberId'];
@@ -43,10 +45,9 @@ if (isset($_POST['update'])) {
     $_SESSION['address'] = $address;
 
     header("Location:update.php");
-
 }
-$res = $c1->fetch();
 
+$res = $c1->fetch();
 ?>
 
 <!DOCTYPE html>
@@ -55,15 +56,13 @@ $res = $c1->fetch();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clinic Form</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Hospital Registration</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body class="bg-light">
 
     <div class="container mt-5">
-
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card shadow">
@@ -101,25 +100,23 @@ $res = $c1->fetch();
             </div>
         </div>
     </div>
+
     <hr>
-    <div class="mx-auto p-2" style="width: 900px;">
 
-
+    <div class="container mt-3">
         <div class="card shadow">
-
             <table class="table table-hover">
                 <thead>
                     <tr>
                         <th scope="col">Id</th>
-                        <th scope="col">Patient's Name</th>
+                        <th scope="col">Name</th>
                         <th scope="col">Age</th>
-                        <th scope="col">Number</th>
+                        <th scope="col">Phone Number</th>
                         <th scope="col">Address</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-
                     <?php while ($data = mysqli_fetch_assoc($res)) { ?>
                     <tr>
                         <th scope="row"><?php echo $data['id'] ?></th>
@@ -128,28 +125,49 @@ $res = $c1->fetch();
                         <td><?php echo $data['number'] ?></td>
                         <td><?php echo $data['address'] ?></td>
                         <td>
-
                             <form method="POST">
                                 <input type="hidden" value="<?php echo $data['id'] ?>" name="deleteId">
                                 <input type="hidden" value="<?php echo $data['name'] ?>" name="nameId">
                                 <input type="hidden" value="<?php echo $data['age'] ?>" name="ageId">
                                 <input type="hidden" value="<?php echo $data['number'] ?>" name="numberId">
                                 <input type="hidden" value="<?php echo $data['address'] ?>" name="addressId">
-
                                 <button type="submit" class="btn btn-warning" name="update">Update</button>
                                 <button type="submit" class="btn btn-danger" name="delete">Delete</button>
                             </form>
                         </td>
                     </tr>
                     <?php } ?>
-
                 </tbody>
             </table>
-
-
         </div>
     </div>
 
+    <!-- Popup Modal -->
+    <div class="modal" id="popupModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Notification</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p><?php echo isset($popupMessage) ? $popupMessage : ''; ?></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6j
+    <?php if (isset($popupMessage)) { ?>
+    <script>
+    const popupModal = new bootstrap.Modal(document.getElementById('popupModal'));
+    popupModal.show();
+    </script>
+    <?php } ?>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

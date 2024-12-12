@@ -23,7 +23,7 @@ class Config
 
     public function insert($name, $age, $number, $address)
     {
-        $query = "INSERT INTO patients (name, age, number, address) VALUES ('$name', $age, $number, '$address')";
+        $query = "INSERT INTO hospital (name, age, number, address) VALUES ('$name', $age, $number, '$address')";
         $res = mysqli_query($this->connection, $query);
         if ($res) {
             echo "Record inserted successfully.";
@@ -34,14 +34,14 @@ class Config
 
     public function fetch()
     {
-        $query = "SELECT * FROM patients";
+        $query = "SELECT * FROM hospital";
         $res = mysqli_query($this->connection, $query);
         return $res;
     }
 
     public function delete($id)
     {
-        $query = "DELETE FROM patients WHERE id = $id";
+        $query = "DELETE FROM hospital WHERE id = $id";
         $res = mysqli_query($this->connection, $query);
         return $res;
     }
@@ -49,7 +49,7 @@ class Config
     public function update($id, $name, $age, $number, $address)
     {
 
-        $query = "UPDATE patients SET name='$name', age=$age, number=$number, address='$address' WHERE  id=$id";
+        $query = "UPDATE hospital SET name='$name', age=$age, number=$number, address='$address' WHERE  id=$id";
         $res = mysqli_query($this->connection, $query);
         return $res;
 
