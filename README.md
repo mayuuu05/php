@@ -27,6 +27,16 @@ This project demonstrates how to implement basic CRUD operations using PHP and M
 2. Use tools like Postman or cURL to test the API endpoints.
 3. Integrate the API with your frontend application or other services.
 
+
+<div>
+
+   <video height="450" src="https://github.com/user-attachments/assets/e7f61c5f-03f5-4f73-b3ab-b0f351cdee5e" />
+  
+
+</div>
+
+
+
 Enjoy building APIs! 😄
 
 
