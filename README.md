@@ -44,6 +44,9 @@ Enjoy building APIs! 😄
 
 
 
+
+
+## Daily task 1
 # 🏥 Hospital Registration Form
 
 This is a simple hospital registration form built using PHP and MySQL. It allows users to register their **Name**, **Age**, **Phone Number**, and **Address**. The data is securely stored in an SQL database.
@@ -76,6 +79,8 @@ This is a simple hospital registration form built using PHP and MySQL. It allows
 
 </div>
 
+## Daily task 2
+
 <div>
 
    <img  height="450" src="https://github.com/user-attachments/assets/7bfcb70f-f28e-4378-b62e-c84629c81ce0" />
@@ -83,6 +88,8 @@ This is a simple hospital registration form built using PHP and MySQL. It allows
 </div>
 
 
+
+## Daily task 3
 # CRUD OPERATION
 <div>
    <img  height="450" src="https://github.com/user-attachments/assets/db6c29c2-a457-4f6a-b208-4776c34ce998" />
@@ -94,6 +101,7 @@ This is a simple hospital registration form built using PHP and MySQL. It allows
 
 </div>
 
+## Daily task 4
 # API GET,POST
 
 <div>
