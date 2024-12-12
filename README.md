@@ -58,6 +58,22 @@ This is a simple hospital registration form built using PHP and MySQL. It allows
 </div>
 
 
+# CRUD in API
+
+<div>
+
+   <video height="450" src="https://github.com/user-attachments/assets/e7f61c5f-03f5-4f73-b3ab-b0f351cdee5e" />
+  
+
+</div>
+
+
+
+
+
+
+
+
 
 
 
